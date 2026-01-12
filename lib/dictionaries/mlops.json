@@ -1,0 +1,188 @@
+[
+  {
+    "key": "mlops",
+    "aliases": ["machine learning operations", "ml operations", "ml devops", "model operations"],
+    "category": "practice",
+    "weight": 1.0
+  },
+  {
+    "key": "ml_pipeline",
+    "aliases": ["machine learning pipeline", "ml workflow", "model pipeline", "training pipeline"],
+    "category": "component",
+    "weight": 1.0
+  },
+  {
+    "key": "feature_store",
+    "aliases": ["feature engineering", "feature management", "feature repository", "feature platform"],
+    "category": "component",
+    "weight": 0.9
+  },
+  {
+    "key": "model_deployment",
+    "aliases": ["model serving", "ml deployment", "inference serving", "model release"],
+    "category": "component",
+    "weight": 1.0
+  },
+  {
+    "key": "kubeflow",
+    "aliases": ["k8s ml", "kubernetes ml", "ml on k8s", "k8s mlops"],
+    "category": "platform",
+    "weight": 0.9
+  },
+  {
+    "key": "mlflow",
+    "aliases": ["ml flow", "ml tracking", "experiment tracking", "model registry"],
+    "category": "platform",
+    "weight": 1.0
+  },
+  {
+    "key": "airflow",
+    "aliases": ["apache airflow", "workflow scheduler", "etl pipeline", "task scheduling"],
+    "category": "platform",
+    "weight": 0.9
+  },
+  {
+    "key": "data_versioning",
+    "aliases": ["dataset versioning", "versioned data", "data lineage", "data tracking"],
+    "category": "practice",
+    "weight": 0.8
+  },
+  {
+    "key": "model_versioning",
+    "aliases": ["model tracking", "versioned models", "model registry", "model artifacts"],
+    "category": "practice",
+    "weight": 0.9
+  },
+  {
+    "key": "model_monitoring",
+    "aliases": ["model observability", "ml monitoring", "performance monitoring", "drift detection"],
+    "category": "practice",
+    "weight": 0.9
+  },
+  {
+    "key": "model_drift",
+    "aliases": ["data drift", "concept drift", "performance degradation", "statistical drift"],
+    "category": "concept",
+    "weight": 0.8
+  },
+  {
+    "key": "a_b_testing",
+    "aliases": ["ab testing", "split testing", "model comparison", "experimentation"],
+    "category": "practice",
+    "weight": 0.8
+  },
+  {
+    "key": "ci_cd_ml",
+    "aliases": ["ml ci/cd", "continuous integration ml", "ml deployment pipeline", "automated ml"],
+    "category": "practice",
+    "weight": 0.9
+  },
+  {
+    "key": "model_validation",
+    "aliases": ["validation testing", "model quality", "accuracy validation", "model testing"],
+    "category": "practice",
+    "weight": 0.8
+  },
+  {
+    "key": "batch_scoring",
+    "aliases": ["batch prediction", "offline inference", "scheduled scoring", "bulk inference"],
+    "category": "component",
+    "weight": 0.7
+  },
+  {
+    "key": "real_time_inference",
+    "aliases": ["online inference", "live prediction", "real-time serving", "low latency"],
+    "category": "component",
+    "weight": 0.8
+  },
+  {
+    "key": "tensorflow",
+    "aliases": ["tf", "tensor flow", "deep learning framework", "ml framework"],
+    "category": "framework",
+    "weight": 1.0
+  },
+  {
+    "key": "pytorch",
+    "aliases": ["torch", "deep learning pytorch", "neural networks", "ai framework"],
+    "category": "framework",
+    "weight": 1.0
+  },
+  {
+    "key": "scikit_learn",
+    "aliases": ["sklearn", "scikit learn", "machine learning sklearn", "ml library"],
+    "category": "framework",
+    "weight": 0.9
+  },
+  {
+    "key": "pandas",
+    "aliases": ["data manipulation", "data analysis", "dataframe", "python pandas"],
+    "category": "library",
+    "weight": 0.8
+  },
+  {
+    "key": "numpy",
+    "aliases": ["numerical python", "array computing", "scientific computing", "math library"],
+    "category": "library",
+    "weight": 0.7
+  },
+  {
+    "key": "dvc",
+    "aliases": ["data version control", "dvc ml", "versioned data", "ml versioning"],
+    "category": "tool",
+    "weight": 0.7
+  },
+  {
+    "key": "kedro",
+    "aliases": ["ml pipeline framework", "data pipeline", "ml project template", "kedro pipeline"],
+    "category": "framework",
+    "weight": 0.7
+  },
+  {
+    "key": "polyaxon",
+    "aliases": ["ml platform", "experiment tracking", "ml experimentation", "ml development"],
+    "category": "platform",
+    "weight": 0.7
+  },
+  {
+    "key": "sagemaker",
+    "aliases": ["aws sagemaker", "amazon sagemaker", "managed ml", "cloud ml platform"],
+    "category": "platform",
+    "weight": 0.8
+  },
+  {
+    "key": "azure_ml",
+    "aliases": ["azure machine learning", "ms ml studio", "microsoft ml", "aml"],
+    "category": "platform",
+    "weight": 0.7
+  },
+  {
+    "key": "vertex_ai",
+    "aliases": ["google vertex ai", "gcp ml", "google ml platform", "automl"],
+    "category": "platform",
+    "weight": 0.7
+  },
+  {
+    "key": "model_registry",
+    "aliases": ["model storage", "model catalog", "artifact registry", "model management"],
+    "category": "component",
+    "weight": 0.8
+  },
+  {
+    "key": "data_quality",
+    "aliases": ["data validation", "quality checks", "data profiling", "data integrity"],
+    "category": "practice",
+    "weight": 0.7
+  },
+  {
+    "key": "model_interpretability",
+    "aliases": ["explainable ai", "xai", "model explainability", "interpretable ml"],
+    "category": "concept",
+    "weight": 0.7
+  },
+  {
+    "key": "automl",
+    "aliases": ["automated machine learning", "automatic ml", "no code ml", "low code ml"],
+    "category": "technology",
+    "weight": 0.7
+  }
+]

@@ -1,0 +1,72 @@
+[
+  {
+    "id": 1,
+    "verb": "建立了",
+    "object": "SRE监控告警体系",
+    "method": "集成 {tech} 实现全方位可观测性",
+    "result": "故障平均发现时间缩短 {detection_time}，系统稳定性提升 {stability_improvement}%"
+  },
+  {
+    "id": 2,
+    "verb": "设计并实施了",
+    "object": "自动化运维平台",
+    "method": "使用 {tech} 实现基础设施即代码",
+    "result": "运维效率提升 {efficiency_improvement}%，人为错误减少 {error_reduction}%"
+  },
+  {
+    "id": 3,
+    "verb": "优化了",
+    "object": "服务性能和可用性",
+    "method": "通过 {tech} 进行容量规划和性能调优",
+    "result": "P99响应时间降低 {response_time}ms，可用性提升至 {availability}%"
+  },
+  {
+    "id": 4,
+    "verb": "实施了",
+    "object": "混沌工程实践",
+    "method": "利用 {tech} 进行故障演练",
+    "result": "系统韧性增强，故障恢复时间缩短 {recovery_time}，MTBF延长 {mtbf_extension}"
+  },
+  {
+    "id": 5,
+    "verb": "制定了",
+    "object": "SLO/SIL/SLA指标体系",
+    "method": "基于 {tech} 建立服务等级协议",
+    "result": "客户满意度提升 {satisfaction_improvement}%，服务中断事件减少 {incident_reduction}%"
+  },
+  {
+    "id": 6,
+    "verb": "构建了",
+    "object": "蓝绿部署和金丝雀发布机制",
+    "method": "采用 {tech} 实现零停机发布",
+    "result": "发布成功率提升至 {success_rate}%，回滚时间缩短至 {rollback_time}"
+  },
+  {
+    "id": 7,
+    "verb": "推进了",
+    "object": "故障复盘和根因分析流程",
+    "method": "使用 {tech} 进行事件跟踪",
+    "result": "同类故障发生率降低 {recurrence_reduction}%，问题定位时间减少 {diagnosis_time}"
+  },
+  {
+    "id": 8,
+    "verb": "强化了",
+    "object": "系统安全性和合规性",
+    "method": "通过 {tech} 实施安全左移",
+    "result": "安全漏洞减少 {vulnerability_reduction}%，合规审计通过率达到 {compliance_rate}%"
+  },
+  {
+    "id": 9,
+    "verb": "建立了",
+    "object": "容量预测和资源优化模型",
+    "method": "运用 {tech} 进行数据分析",
+    "result": "资源利用率提升 {utilization_improvement}%，成本节约 {cost_savings} 万元"
+  },
+  {
+    "id": 10,
+    "verb": "完善了",
+    "object": "应急响应和故障处理机制",
+    "method": "集成 {tech} 实现快速告警和响应",
+    "result": "MTTR从 {mttr_before} 缩短至 {mttr_after}，系统可靠性提升 {reliability_improvement}%"
+  }
+]

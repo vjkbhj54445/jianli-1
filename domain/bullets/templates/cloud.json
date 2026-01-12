@@ -1,0 +1,72 @@
+[
+  {
+    "id": 1,
+    "verb": "设计并实现了",
+    "object": "高可用云原生基础设施",
+    "method": "使用 {tech} 技术栈",
+    "result": "达到 {availability}% 可用性，支持 {scale} 并发用户"
+  },
+  {
+    "id": 2,
+    "verb": "构建了",
+    "object": "容器化部署流水线",
+    "method": "基于 {tech} 进行自动化CI/CD",
+    "result": "将部署时间从 {time_before} 缩短至 {time_after}"
+  },
+  {
+    "id": 3,
+    "verb": "优化了",
+    "object": "云资源成本管理策略",
+    "method": "通过 {tech} 实现资源调度优化",
+    "result": "节省 {cost_reduction}% 的云资源成本"
+  },
+  {
+    "id": 4,
+    "verb": "主导了",
+    "object": "混合云架构迁移项目",
+    "method": "采用 {tech} 实现无缝切换",
+    "result": "成功迁移 {migration_count} 个核心服务，停机时间小于 {downtime} 分钟"
+  },
+  {
+    "id": 5,
+    "verb": "实施了",
+    "object": "多区域灾备方案",
+    "method": "利用 {tech} 实现异地容灾",
+    "result": "RTO时间缩短至 {rto_time}，RPO接近零"
+  },
+  {
+    "id": 6,
+    "verb": "开发了",
+    "object": "云监控和告警系统",
+    "method": "集成 {tech} 实现实时监控",
+    "result": "故障检测时间减少 {detection_time}，MTTR降低 {mttr_reduction}%"
+  },
+  {
+    "id": 7,
+    "verb": "重构了",
+    "object": "单体应用为微服务架构",
+    "method": "借助 {tech} 实现服务拆分",
+    "result": "系统响应时间降低 {response_time}，扩展性提升 {scalability_increase}%"
+  },
+  {
+    "id": 8,
+    "verb": "搭建了",
+    "object": "云上DevOps平台",
+    "method": "运用 {tech} 构建持续交付体系",
+    "result": "发布频率提升 {release_frequency}，生产环境故障率下降 {failure_rate}%"
+  },
+  {
+    "id": 9,
+    "verb": "规划了",
+    "object": "企业云原生转型路线图",
+    "method": "结合 {tech} 推进技术升级",
+    "result": "预计年度IT成本节约 {annual_savings} 万元，研发效率提升 {efficiency_improvement}%"
+  },
+  {
+    "id": 10,
+    "verb": "保障了",
+    "object": "大规模云服务稳定运行",
+    "method": "通过 {tech} 实现弹性伸缩",
+    "result": "支撑 {peak_traffic} 峰值流量，SLA达到 {sla_level}%"
+  }
+]

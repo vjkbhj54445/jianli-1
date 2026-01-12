@@ -1,0 +1,72 @@
+[
+  {
+    "id": 1,
+    "verb": "构建了",
+    "object": "端到端MLOps平台",
+    "method": "集成 {tech} 实现模型训练到部署全流程",
+    "result": "模型交付周期缩短 {delivery_time}，模型性能提升 {performance_improvement}%"
+  },
+  {
+    "id": 2,
+    "verb": "开发了",
+    "object": "自动化特征工程管道",
+    "method": "使用 {tech} 进行数据预处理和特征提取",
+    "result": "特征工程效率提升 {efficiency_improvement}%，模型准确率提高 {accuracy_improvement}%"
+  },
+  {
+    "id": 3,
+    "verb": "设计并实现了",
+    "object": "模型版本管理和实验跟踪系统",
+    "method": "基于 {tech} 构建模型生命周期管理",
+    "result": "模型迭代速度提升 {iteration_speed}，实验复现效率提高 {reproducibility_improvement}%"
+  },
+  {
+    "id": 4,
+    "verb": "优化了",
+    "object": "模型推理服务性能",
+    "method": "采用 {tech} 实现低延迟高并发推理",
+    "result": "推理延迟降低 {latency_reduction}ms，吞吐量提升 {throughput_improvement} QPS"
+  },
+  {
+    "id": 5,
+    "verb": "建立了",
+    "object": "模型监控和漂移检测机制",
+    "method": "利用 {tech} 实现实时模型健康监测",
+    "result": "模型性能退化检测时间缩短至 {detection_time}，维护成本降低 {maintenance_cost_reduction}%"
+  },
+  {
+    "id": 6,
+    "verb": "实施了",
+    "object": "A/B测试和模型对比框架",
+    "method": "通过 {tech} 实现模型效果科学评估",
+    "result": "模型上线成功率提升至 {success_rate}%，业务指标改善 {business_improvement}%"
+  },
+  {
+    "id": 7,
+    "verb": "搭建了",
+    "object": "数据质量验证和监控系统",
+    "method": "运用 {tech} 实现数据完整性检查",
+    "result": "数据质量问题发现率提升 {quality_detection_rate}%，模型准确性提高 {accuracy_improvement}%"
+  },
+  {
+    "id": 8,
+    "verb": "推进了",
+    "object": "机器学习模型标准化流程",
+    "method": "结合 {tech} 建立模型开发规范",
+    "result": "模型开发效率提升 {development_efficiency}%，模型一致性达到 {consistency_rate}%"
+  },
+  {
+    "id": 9,
+    "verb": "保障了",
+    "object": "大规模机器学习模型稳定运行",
+    "method": "通过 {tech} 实现弹性伸缩和负载均衡",
+    "result": "支撑 {model_count} 个模型并发运行，服务可用性达 {availability}%"
+  },
+  {
+    "id": 10,
+    "verb": "研发了",
+    "object": "模型解释性和公平性评估工具",
+    "method": "使用 {tech} 实现AI模型透明化",
+    "result": "模型可信度提升 {trustworthiness_improvement}%，合规风险降低 {compliance_risk_reduction}%"
+  }
+]

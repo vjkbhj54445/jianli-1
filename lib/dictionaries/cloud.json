@@ -1,0 +1,182 @@
+[
+  {
+    "key": "aws",
+    "aliases": ["amazon web services", "amazons web service", "aws cloud"],
+    "category": "cloud_platform",
+    "weight": 1.0
+  },
+  {
+    "key": "azure",
+    "aliases": ["microsoft azure", "ms azure", "windows azure"],
+    "category": "cloud_platform",
+    "weight": 1.0
+  },
+  {
+    "key": "gcp",
+    "aliases": ["google cloud platform", "google cloud", "gce", "google compute engine"],
+    "category": "cloud_platform",
+    "weight": 1.0
+  },
+  {
+    "key": "kubernetes",
+    "aliases": ["k8s", "kubes", "kubernates", "k8s cluster", "k8s deployment"],
+    "category": "container_orchestration",
+    "weight": 1.0
+  },
+  {
+    "key": "docker",
+    "aliases": ["docker container", "docker image", "docker engine"],
+    "category": "containerization",
+    "weight": 0.9
+  },
+  {
+    "key": "terraform",
+    "aliases": ["tf", "terraform config", "infrastructure as code", "iac terraform"],
+    "category": "infrastructure_as_code",
+    "weight": 0.9
+  },
+  {
+    "key": "openstack",
+    "aliases": ["open stack", "red hat openstack", "rdo"],
+    "category": "cloud_platform",
+    "weight": 0.7
+  },
+  {
+    "key": "vmware",
+    "aliases": ["vsphere", "esxi", "vcenter", "virtual machine vmware"],
+    "category": "virtualization",
+    "weight": 0.8
+  },
+  {
+    "key": "ec2",
+    "aliases": ["elastic compute cloud", "amazon ec2", "aws ec2 instance"],
+    "category": "cloud_service",
+    "weight": 0.8
+  },
+  {
+    "key": "s3",
+    "aliases": ["simple storage service", "amazon s3", "aws s3 bucket"],
+    "category": "cloud_service",
+    "weight": 0.8
+  },
+  {
+    "key": "lambda",
+    "aliases": ["aws lambda", "serverless computing", "serverless function"],
+    "category": "cloud_service",
+    "weight": 0.8
+  },
+  {
+    "key": "iam",
+    "aliases": ["identity access management", "aws iam", "access control"],
+    "category": "security",
+    "weight": 0.7
+  },
+  {
+    "key": "route53",
+    "aliases": ["amazon route53", "dns routing", "aws dns"],
+    "category": "networking",
+    "weight": 0.6
+  },
+  {
+    "key": "load_balancer",
+    "aliases": ["elb", "application load balancer", "alb", "classic load balancer"],
+    "category": "networking",
+    "weight": 0.7
+  },
+  {
+    "key": "vpc",
+    "aliases": ["virtual private cloud", "aws vpc", "private network"],
+    "category": "networking",
+    "weight": 0.7
+  },
+  {
+    "key": "cloudformation",
+    "aliases": ["aws cloudformation", "cfn", "template stack"],
+    "category": "infrastructure_as_code",
+    "weight": 0.7
+  },
+  {
+    "key": "cloudwatch",
+    "aliases": ["aws cloudwatch", "monitoring", "log monitoring"],
+    "category": "monitoring",
+    "weight": 0.7
+  },
+  {
+    "key": "rds",
+    "aliases": ["relational database service", "aws rds", "managed database"],
+    "category": "database",
+    "weight": 0.7
+  },
+  {
+    "key": "eks",
+    "aliases": ["elastic kubernetes service", "aws eks", "k8s on aws"],
+    "category": "container_orchestration",
+    "weight": 0.9
+  },
+  {
+    "key": "aks",
+    "aliases": ["azure kubernetes service", "microsoft aks", "k8s on azure"],
+    "category": "container_orchestration",
+    "weight": 0.8
+  },
+  {
+    "key": "gke",
+    "aliases": ["google kubernetes engine", "gcp gke", "k8s on gcp"],
+    "category": "container_orchestration",
+    "weight": 0.8
+  },
+  {
+    "key": "api_gateway",
+    "aliases": ["rest api gateway", "graphql api", "microservices gateway"],
+    "category": "networking",
+    "weight": 0.6
+  },
+  {
+    "key": "serverless",
+    "aliases": ["serverless architecture", "faas", "function as a service", "bass", "backend as a service"],
+    "category": "architecture",
+    "weight": 0.8
+  },
+  {
+    "key": "iac",
+    "aliases": ["infrastructure automation", "infrastructure provisioning", "automated infrastructure"],
+    "category": "infrastructure_as_code",
+    "weight": 0.8
+  },
+  {
+    "key": "multi_cloud",
+    "aliases": ["hybrid cloud", "multi-cloud", "cross cloud", "cloud agnostic"],
+    "category": "architecture",
+    "weight": 0.7
+  },
+  {
+    "key": "cloud_native",
+    "aliases": ["cloud native", "microservices architecture", "cloud native app"],
+    "category": "architecture",
+    "weight": 0.8
+  },
+  {
+    "key": "vagrant",
+    "aliases": ["virtual environment", "dev environment", "local vm"],
+    "category": "development_tools",
+    "weight": 0.6
+  },
+  {
+    "key": "ansible",
+    "aliases": ["configuration management", "automation tool", "provisioning tool"],
+    "category": "automation",
+    "weight": 0.8
+  },
+  {
+    "key": "puppet",
+    "aliases": ["it automation", "system administration", "configuration management puppet"],
+    "category": "automation",
+    "weight": 0.7
+  },
+  {
+    "key": "chef",
+    "aliases": ["devops chef", "server configuration", "infrastructure automation chef"],
+    "category": "automation",
+    "weight": 0.7
+  }
+]

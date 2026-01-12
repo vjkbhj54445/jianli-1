@@ -1,0 +1,182 @@
+[
+  {
+    "key": "sre",
+    "aliases": ["site reliability engineering", "site reliability engineer", "systems reliability engineering"],
+    "category": "role",
+    "weight": 1.0
+  },
+  {
+    "key": "observability",
+    "aliases": ["system observability", "application observability", "infrastructure observability"],
+    "category": "practice",
+    "weight": 1.0
+  },
+  {
+    "key": "monitoring",
+    "aliases": ["system monitoring", "application monitoring", "infrastructure monitoring", "metrics collection"],
+    "category": "practice",
+    "weight": 0.9
+  },
+  {
+    "key": "prometheus",
+    "aliases": ["prometheus server", "prometheus alerting", "time series database", "tsdb"],
+    "category": "tool",
+    "weight": 1.0
+  },
+  {
+    "key": "grafana",
+    "aliases": ["dashboard", "visualization", "metric visualization", "data visualization"],
+    "category": "tool",
+    "weight": 0.9
+  },
+  {
+    "key": "alerting",
+    "aliases": ["alerts", "notification system", "incident response", "alert manager"],
+    "category": "practice",
+    "weight": 0.8
+  },
+  {
+    "key": "logging",
+    "aliases": ["log aggregation", "log analysis", "structured logging", "log collection"],
+    "category": "practice",
+    "weight": 0.8
+  },
+  {
+    "key": "elasticsearch",
+    "aliases": ["es", "elk", "elasticsearch logstash kibana", "search engine", "document store"],
+    "category": "tool",
+    "weight": 0.9
+  },
+  {
+    "key": "logstash",
+    "aliases": ["log processing", "log pipeline", "data processing pipeline", "log transformation"],
+    "category": "tool",
+    "weight": 0.7
+  },
+  {
+    "key": "kibana",
+    "aliases": ["log visualization", "analytics dashboard", "es dashboard", "search analytics"],
+    "category": "tool",
+    "weight": 0.8
+  },
+  {
+    "key": "jaeger",
+    "aliases": ["distributed tracing", "tracing system", "service tracing", "request tracing"],
+    "category": "tool",
+    "weight": 0.8
+  },
+  {
+    "key": "opentracing",
+    "aliases": ["distributed tracing standard", "tracing api", "trace instrumentation"],
+    "category": "standard",
+    "weight": 0.7
+  },
+  {
+    "key": "load_testing",
+    "aliases": ["performance testing", "stress testing", "capacity planning", "scalability testing"],
+    "category": "practice",
+    "weight": 0.7
+  },
+  {
+    "key": "chaos_engineering",
+    "aliases": ["failure testing", "resilience testing", "chaos monkey", "fault injection"],
+    "category": "practice",
+    "weight": 0.8
+  },
+  {
+    "key": "uptime",
+    "aliases": ["availability", "system availability", "service availability", "sla compliance"],
+    "category": "metric",
+    "weight": 0.9
+  },
+  {
+    "key": "latency",
+    "aliases": ["response time", "request latency", "p95", "p99", "percentile latency"],
+    "category": "metric",
+    "weight": 0.9
+  },
+  {
+    "key": "throughput",
+    "aliases": ["requests per second", "rps", "qps", "queries per second", "concurrency"],
+    "category": "metric",
+    "weight": 0.8
+  },
+  {
+    "key": "error_rate",
+    "aliases": ["error percentage", "failure rate", "success rate", "quality metrics"],
+    "category": "metric",
+    "weight": 0.9
+  },
+  {
+    "key": "sla",
+    "aliases": ["service level agreement", "availability guarantee", "performance commitment"],
+    "category": "concept",
+    "weight": 0.8
+  },
+  {
+    "key": "slo",
+    "aliases": ["service level objective", "target metric", "performance target"],
+    "category": "concept",
+    "weight": 0.8
+  },
+  {
+    "key": "slu",
+    "aliases": ["service level unit", "measurement unit", "sli measurement"],
+    "category": "concept",
+    "weight": 0.7
+  },
+  {
+    "key": "incident_response",
+    "aliases": ["incident management", "on-call", "pager duty", "emergency response"],
+    "category": "practice",
+    "weight": 0.9
+  },
+  {
+    "key": "postmortem",
+    "aliases": ["post-mortem", "incident analysis", "root cause analysis", "rca"],
+    "category": "process",
+    "weight": 0.7
+  },
+  {
+    "key": "blue_green_deployments",
+    "aliases": ["blue-green", "zero downtime", "parallel deployments", "a/b deployments"],
+    "category": "deployment",
+    "weight": 0.7
+  },
+  {
+    "key": "canary_release",
+    "aliases": ["canary deployment", "gradual rollout", "risk mitigation", "progressive delivery"],
+    "category": "deployment",
+    "weight": 0.8
+  },
+  {
+    "key": "circuit_breaker",
+    "aliases": ["circuit breaker pattern", "fault tolerance", "resilience pattern", "fail fast"],
+    "category": "pattern",
+    "weight": 0.7
+  },
+  {
+    "key": "retry_logic",
+    "aliases": ["exponential backoff", "fault tolerance", "error handling", "resilience"],
+    "category": "pattern",
+    "weight": 0.6
+  },
+  {
+    "key": "rate_limiting",
+    "aliases": ["throttling", "traffic shaping", "request limiting", "api rate limit"],
+    "category": "pattern",
+    "weight": 0.7
+  },
+  {
+    "key": "health_checks",
+    "aliases": ["liveness probe", "readiness probe", "service health", "system health"],
+    "category": "practice",
+    "weight": 0.7
+  },
+  {
+    "key": "auto_scaling",
+    "aliases": ["autoscaling", "horizontal scaling", "vertical scaling", "dynamic scaling"],
+    "category": "practice",
+    "weight": 0.8
+  }
+]
