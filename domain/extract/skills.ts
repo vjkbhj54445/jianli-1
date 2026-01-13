@@ -15,32 +15,30 @@ export interface DictionaryItem {
  * @returns 提取的技能标签数组（已去重和归一化）
  */
 export function extractSkills(text: string, dictionaries: DictionaryItem[]): string[] {
-  // 将所有词典合并为一个数组
+  // 将所有词典项及其别名转换为Set，提高查找效率
   const allTerms = dictionaries.flatMap(dict => [
-    { term: dict.key, normalizedTerm: normalizeTag(dict.key) },
-    ...dict.aliases.map(alias => ({ term: alias, normalizedTerm: normalizeTag(alias) }))
+    { term: dict.key, normalizedTerm: normalizeTag(dict.key), parentKey: dict.key },
+    ...dict.aliases.map(alias => ({ term: alias, normalizedTerm: normalizeTag(alias), parentKey: dict.key }))
   ]);
+  
+  // 创建一个Map来快速查找父键
+  const termToParentMap = new Map<string, string>();
+  allTerms.forEach(({ term, parentKey }) => {
+    termToParentMap.set(term.toLowerCase(), parentKey);
+  });
 
   // 使用 Set 来确保结果唯一性
   const matchedSkills = new Set<string>();
+  const lowerText = text.toLowerCase();
 
   // 遍历所有术语，检查是否在文本中出现
-  for (const { term, normalizedTerm } of allTerms) {
+  for (const { term, parentKey } of allTerms) {
     // 创建不区分大小写的正则表达式
     const regex = new RegExp(`\\b${escapeRegExp(term)}\\b`, 'gi');
     
     // 检查文本中是否包含该术语
-    if (regex.test(text)) {
-      // 添加归一化的主键而不是匹配的别名
-      const matchedDictItem = dictionaries.find(item => 
-        item.key === normalizedTerm || item.aliases.some(alias => normalizeTag(alias) === normalizedTerm)
-      ) || dictionaries.find(item => 
-        item.aliases.some(alias => normalizeTag(alias) === normalizedTerm)
-      );
-
-      if (matchedDictItem) {
-        matchedSkills.add(normalizeTag(matchedDictItem.key));
-      }
+    if (regex.test(lowerText)) {
+      matchedSkills.add(parentKey);
     }
   }
 

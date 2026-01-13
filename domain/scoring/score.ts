@@ -43,9 +43,9 @@ export function calculateJdScore(
   dictionaries: DictionaryItem[]
 ): ScoringResult {
   // 从JD中提取期望的标签
-  const expectedTech = extractTechFromJd(jdText, dictionaries);
-  const expectedRole = extractRoleTags(jdText);
-  const expectedScene = extractSceneTags(jdText);
+  const expectedTech = extractTechFromJd(jdText, dictionaries) || [];
+  const expectedRole = extractRoleTags(jdText) || [];
+  const expectedScene = extractSceneTags(jdText) || [];
 
   // 计算命中情况
   const techHit = resumeProfile.tech.filter(skill => expectedTech.includes(skill));
@@ -57,7 +57,7 @@ export function calculateJdScore(
   const roleMissing = expectedRole.filter(role => !resumeProfile.role.includes(role));
   const sceneMissing = expectedScene.filter(scene => !resumeProfile.scene.includes(scene));
 
-  // 计算命中率
+  // 计算命中率，添加分母非零检查
   const techHitRate = expectedTech.length > 0 ? techHit.length / expectedTech.length : 0;
   const roleHitRate = expectedRole.length > 0 ? roleHit.length / expectedRole.length : 0;
   const sceneHitRate = expectedScene.length > 0 ? sceneHit.length / expectedScene.length : 0;

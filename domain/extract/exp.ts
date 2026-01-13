@@ -8,6 +8,23 @@ export function extractExpBucket(text: string): '0-1' | '1-3' | '3-5' | '5+' | '
   const lowerText = text.toLowerCase();
 
   // 首先尝试直接匹配经验年限的模式
+  const directMatch = matchDirectYears(lowerText);
+  if (directMatch) return directMatch;
+
+  // 如果没有直接匹配到年限，尝试从年份区间推算
+  const graduationMatch = matchGraduationYears(lowerText);
+  if (graduationMatch) return graduationMatch;
+
+  // 尝试匹配时间段，如 "2018-2022" 或 "2020至今"
+  const periodMatch = matchPeriod(lowerText);
+  if (periodMatch) return periodMatch;
+
+  // 如果没有找到任何匹配项，则返回unknown
+  return 'unknown';
+}
+
+// 匹配直接经验年限
+function matchDirectYears(lowerText: string): '0-1' | '1-3' | '3-5' | '5+' | null {
   // 匹配如 "X年经验", "X年工作", "X年从业", "X年以上" 等
   const expRegex = /(\d+(?:\.\d+)?)\s*年\s*(?:经验|工作|从业|以上|以内|开发|软件|编程|项目)/g;
   let match;
@@ -23,8 +40,11 @@ export function extractExpBucket(text: string): '0-1' | '1-3' | '3-5' | '5+' | '
       return '5+';
     }
   }
+  return null;
+}
 
-  // 如果没有直接匹配到年限，尝试从年份区间推算
+// 匹配毕业年份
+function matchGraduationYears(lowerText: string): '0-1' | '1-3' | '3-5' | '5+' | null {
   // 匹配如 "2019年毕业" 或 "2018-2022" 的模式
   const graduationYearRegex = /(\d{4})\s*年?\s*毕业/g;
   let gradMatch;
@@ -44,8 +64,12 @@ export function extractExpBucket(text: string): '0-1' | '1-3' | '3-5' | '5+' | '
       }
     }
   }
+  return null;
+}
 
-  // 尝试匹配时间段，如 "2018-2022" 或 "2020至今"
+// 匹配时间段
+function matchPeriod(lowerText: string): '0-1' | '1-3' | '3-5' | '5+' | null {
+  const currentYear = new Date().getFullYear();
   const periodRegex = /(\d{4})\s*[-–—]\s*(\d{4}|今|现在|present|to date|to now)/g;
   let periodMatch;
   while ((periodMatch = periodRegex.exec(lowerText)) !== null) {
@@ -75,7 +99,5 @@ export function extractExpBucket(text: string): '0-1' | '1-3' | '3-5' | '5+' | '
       }
     }
   }
-
-  // 如果没有找到任何匹配项，则返回unknown
-  return 'unknown';
+  return null;
 }

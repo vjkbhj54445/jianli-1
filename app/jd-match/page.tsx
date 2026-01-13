@@ -15,6 +15,7 @@ import cloudDictionary from "@/lib/dictionaries/cloud.json";
 import sreDictionary from "@/lib/dictionaries/sre.json";
 import mlopsDictionary from "@/lib/dictionaries/mlops.json";
 import { useRouter, useSearchParams } from 'next/navigation';
+import { Loader2 } from 'lucide-react'; // 导入加载图标
 
 export default function JdMatchPage() {
   const [jdText, setJdText] = useState("");
@@ -34,6 +35,7 @@ export default function JdMatchPage() {
   const [hitItems, setHitItems] = useState<{ tech: string[]; role: string[]; scene: string[] }>({ tech: [], role: [], scene: [] });
   const [missingItems, setMissingItems] = useState<{ tech: string[]; role: string[]; scene: string[] }>({ tech: [], role: [], scene: [] });
   const [suggestions, setSuggestions] = useState<string[]>([]);
+  const [isProcessing, setIsProcessing] = useState(false); // 添加加载状态
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -51,46 +53,48 @@ export default function JdMatchPage() {
     }
   }, [searchParams]);
 
-  const handleProcess = () => {
-    // 提取JD的技能、角色和场景标签
-    const extractedJdTags = extractSkills(jdText, dictionaries);
-    setJdSkillTags(extractedJdTags);
-    setJdRoleTags(extractRoleTags(jdText));
-    setJdSceneTags(extractSceneTags(jdText));
+  const handleProcess = async () => {
+    setIsProcessing(true); // 设置加载状态
+    try {
+      // 提取JD的技能、角色和场景标签
+      const extractedJdTags = extractSkills(jdText, dictionaries);
+      setJdSkillTags(extractedJdTags);
+      setJdRoleTags(extractRoleTags(jdText));
+      setJdSceneTags(extractSceneTags(jdText));
 
-    // 提取简历的技能、角色和场景标签
-    const extractedResumeTags = extractSkills(resumeText, dictionaries);
-    setResumeSkillTags(extractedResumeTags);
-    
-    // 提取学历和经验桶
-    setEduLevel(extractEdu(resumeText));
-    setExpBucket(extractExpBucket(resumeText));
-    
-    // 提取简历的角色和场景标签
-    setRoleTags(extractRoleTags(resumeText));
-    setSceneTags(extractSceneTags(resumeText));
+      // 提取简历的技能、角色和场景标签
+      const extractedResumeTags = extractSkills(resumeText, dictionaries);
+      setResumeSkillTags(extractedResumeTags);
+      
+      // 提取学历和经验桶
+      setEduLevel(extractEdu(resumeText));
+      setExpBucket(extractExpBucket(resumeText));
+      
+      // 提取简历的角色和场景标签
+      setRoleTags(extractRoleTags(resumeText));
+      setSceneTags(extractSceneTags(resumeText));
 
-    // 创建简历资料对象
-    const resumeProfile: ResumeProfile = {
-      tech: extractedResumeTags,
-      role: extractRoleTags(resumeText),
-      scene: extractSceneTags(resumeText)
-    };
+      // 创建简历资料对象
+      const resumeProfile: ResumeProfile = {
+        tech: extractedResumeTags,
+        role: extractRoleTags(resumeText),
+        scene: extractSceneTags(resumeText)
+      };
 
-    // 计算匹配度
-    const scoringResult = calculateJdScore(jdText, resumeProfile, dictionaries);
-    setTotalScore(scoringResult.totalScore);
-    setBreakdown(scoringResult.breakdown);
-    setHitItems(scoringResult.hit);
-    setMissingItems(scoringResult.missing);
+      // 计算匹配度
+      const scoringResult = calculateJdScore(jdText, resumeProfile, dictionaries);
+      setTotalScore(scoringResult.totalScore);
+      setBreakdown(scoringResult.breakdown);
+      setHitItems(scoringResult.hit);
+      setMissingItems(scoringResult.missing);
 
-    // 生成建议
-    const generatedSuggestions = generateSuggestions(scoringResult);
-    setSuggestions(generatedSuggestions);
+      // 生成建议
+      const generatedSuggestions = generateSuggestions(scoringResult);
+      setSuggestions(generatedSuggestions);
 
-    // 更新输出文本
-    setOutputText(`匹配度分析结果：
-    
+      // 更新输出文本
+      setOutputText(`匹配度分析结果：
+      
 总分: ${scoringResult.totalScore}/100
 
 详细评分:
@@ -109,21 +113,24 @@ export default function JdMatchPage() {
 - 角色: ${scoringResult.missing.role.join(', ') || '无'}
 - 场景: ${scoringResult.missing.scene.join(', ') || '无'}`);
 
-    // 上报事件和简历统计数据
-    trackEvent('click_analyze', {
-      target_role: selectedDirection,
-      skill_count: extractedResumeTags.length,
-      missing_count: scoringResult.missing.tech.length
-    });
+      // 上报事件和简历统计数据
+      trackEvent('click_analyze', {
+        target_role: selectedDirection,
+        skill_count: extractedResumeTags.length,
+        missing_count: scoringResult.missing.tech.length
+      });
 
-    trackResumeStats(
-      selectedDirection,
-      extractEdu(resumeText),
-      extractExpBucket(resumeText),
-      scoringResult.totalScore,
-      extractedResumeTags,
-      scoringResult.missing.tech
-    );
+      trackResumeStats(
+        selectedDirection,
+        extractEdu(resumeText),
+        extractExpBucket(resumeText),
+        scoringResult.totalScore,
+        extractedResumeTags,
+        scoringResult.missing.tech
+      );
+    } finally {
+      setIsProcessing(false); // 移除加载状态
+    }
   };
 
   const handleClearParams = () => {
@@ -191,8 +198,17 @@ export default function JdMatchPage() {
       </div>
       
       <div className="flex justify-center mb-6">
-        <Button onClick={handleProcess} className="w-full md:w-auto">
-          开始分析
+        <Button 
+          onClick={handleProcess} 
+          disabled={isProcessing}
+          className="w-full md:w-auto"
+        >
+          {isProcessing ? (
+            <span className="flex items-center">
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              分析中...
+            </span>
+          ) : '开始分析'}
         </Button>
       </div>
       
@@ -264,11 +280,12 @@ export default function JdMatchPage() {
               <div className="mb-4">
                 <h4 className="font-medium mb-1">JD 技能标签:</h4>
                 {jdSkillTags.length > 0 ? (
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2 max-h-24 overflow-y-auto">
                     {jdSkillTags.map((tag, index) => (
                       <span 
                         key={index} 
-                        className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm"
+                        title={tag} // 鼠标悬停显示完整标签
+                        className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm truncate max-w-48"
                       >
                         {tag}
                       </span>
@@ -282,11 +299,12 @@ export default function JdMatchPage() {
               <div className="mb-4">
                 <h4 className="font-medium mb-1">JD 角色标签:</h4>
                 {jdRoleTags.length > 0 ? (
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2 max-h-24 overflow-y-auto">
                     {jdRoleTags.map((tag, index) => (
                       <span 
                         key={index} 
-                        className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm"
+                        title={tag} // 鼠标悬停显示完整标签
+                        className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm truncate max-w-48"
                       >
                         {tag}
                       </span>
@@ -300,11 +318,12 @@ export default function JdMatchPage() {
               <div className="mb-4">
                 <h4 className="font-medium mb-1">JD 场景标签:</h4>
                 {jdSceneTags.length > 0 ? (
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2 max-h-24 overflow-y-auto">
                     {jdSceneTags.map((tag, index) => (
                       <span 
                         key={index} 
-                        className="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm"
+                        title={tag} // 鼠标悬停显示完整标签
+                        className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm truncate max-w-48"
                       >
                         {tag}
                       </span>
@@ -322,11 +341,12 @@ export default function JdMatchPage() {
               <div className="mb-4">
                 <h4 className="font-medium mb-1">简历技能标签:</h4>
                 {resumeSkillTags.length > 0 ? (
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2 max-h-24 overflow-y-auto">
                     {resumeSkillTags.map((tag, index) => (
                       <span 
                         key={index} 
-                        className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm"
+                        title={tag} // 鼠标悬停显示完整标签
+                        className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm truncate max-w-48"
                       >
                         {tag}
                       </span>
@@ -340,11 +360,12 @@ export default function JdMatchPage() {
               <div className="mb-4">
                 <h4 className="font-medium mb-1">简历角色标签:</h4>
                 {roleTags.length > 0 ? (
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2 max-h-24 overflow-y-auto">
                     {roleTags.map((tag, index) => (
                       <span 
                         key={index} 
-                        className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm"
+                        title={tag} // 鼠标悬停显示完整标签
+                        className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm truncate max-w-48"
                       >
                         {tag}
                       </span>
@@ -358,11 +379,12 @@ export default function JdMatchPage() {
               <div className="mb-4">
                 <h4 className="font-medium mb-1">简历场景标签:</h4>
                 {sceneTags.length > 0 ? (
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2 max-h-24 overflow-y-auto">
                     {sceneTags.map((tag, index) => (
                       <span 
                         key={index} 
-                        className="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm"
+                        title={tag} // 鼠标悬停显示完整标签
+                        className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm truncate max-w-48"
                       >
                         {tag}
                       </span>
@@ -415,7 +437,11 @@ export default function JdMatchPage() {
                   {hitItems.tech.length > 0 ? (
                     <div className="flex flex-wrap gap-2">
                       {hitItems.tech.map((item, index) => (
-                        <span key={index} className="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs">
+                        <span 
+                          key={index} 
+                          title={item} // 鼠标悬停显示完整标签
+                          className="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs truncate max-w-48"
+                        >
                           {item}
                         </span>
                       ))}
@@ -430,7 +456,11 @@ export default function JdMatchPage() {
                   {missingItems.tech.length > 0 ? (
                     <div className="flex flex-wrap gap-2">
                       {missingItems.tech.map((item, index) => (
-                        <span key={index} className="px-2 py-1 bg-red-100 text-red-800 rounded-full text-xs">
+                        <span 
+                          key={index} 
+                          title={item} // 鼠标悬停显示完整标签
+                          className="px-2 py-1 bg-red-100 text-red-800 rounded-full text-xs truncate max-w-48"
+                        >
                           {item}
                         </span>
                       ))}
@@ -447,7 +477,11 @@ export default function JdMatchPage() {
                   {hitItems.role.length > 0 ? (
                     <div className="flex flex-wrap gap-2">
                       {hitItems.role.map((item, index) => (
-                        <span key={index} className="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs">
+                        <span 
+                          key={index} 
+                          title={item} // 鼠标悬停显示完整标签
+                          className="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs truncate max-w-48"
+                        >
                           {item}
                         </span>
                       ))}
@@ -462,7 +496,11 @@ export default function JdMatchPage() {
                   {missingItems.role.length > 0 ? (
                     <div className="flex flex-wrap gap-2">
                       {missingItems.role.map((item, index) => (
-                        <span key={index} className="px-2 py-1 bg-red-100 text-red-800 rounded-full text-xs">
+                        <span 
+                          key={index} 
+                          title={item} // 鼠标悬停显示完整标签
+                          className="px-2 py-1 bg-red-100 text-red-800 rounded-full text-xs truncate max-w-48"
+                        >
                           {item}
                         </span>
                       ))}
@@ -479,7 +517,11 @@ export default function JdMatchPage() {
                   {hitItems.scene.length > 0 ? (
                     <div className="flex flex-wrap gap-2">
                       {hitItems.scene.map((item, index) => (
-                        <span key={index} className="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs">
+                        <span 
+                          key={index} 
+                          title={item} // 鼠标悬停显示完整标签
+                          className="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs truncate max-w-48"
+                        >
                           {item}
                         </span>
                       ))}
@@ -494,7 +536,11 @@ export default function JdMatchPage() {
                   {missingItems.scene.length > 0 ? (
                     <div className="flex flex-wrap gap-2">
                       {missingItems.scene.map((item, index) => (
-                        <span key={index} className="px-2 py-1 bg-red-100 text-red-800 rounded-full text-xs">
+                        <span 
+                          key={index} 
+                          title={item} // 鼠标悬停显示完整标签
+                          className="px-2 py-1 bg-red-100 text-red-800 rounded-full text-xs truncate max-w-48"
+                        >
                           {item}
                         </span>
                       ))}

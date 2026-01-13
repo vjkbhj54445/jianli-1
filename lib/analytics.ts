@@ -1,4 +1,7 @@
 import { isTelemetryEnabled } from '@/infra/privacy';
+import cloudDictionary from '@/lib/dictionaries/cloud.json';
+import sreDictionary from '@/lib/dictionaries/sre.json';
+import mlopsDictionary from '@/lib/dictionaries/mlops.json';
 
 // 定义事件类型枚举
 export type EventType = 
@@ -75,6 +78,12 @@ export async function trackEvent(
   }
 }
 
+// 获取所有有效技能字典
+const getAllSkillsDictionary = () => {
+  const allDictionaries = [...cloudDictionary, ...sreDictionary, ...mlopsDictionary];
+  return new Set(allDictionaries.map(item => item.key));
+};
+
 // 上报简历统计数据
 export async function trackResumeStats(
   targetRole?: string,
@@ -84,8 +93,10 @@ export async function trackResumeStats(
   skillTags?: string[],
   missingTags?: string[]
 ): Promise<void> {
-  if (!isTelemetryEnabled()) {
-    return; // 如果遥测未启用，直接返回
+  // 实时检查遥测开关状态
+  if (!localStorage.getItem('resume_lab_telemetry_enabled') || 
+      localStorage.getItem('resume_lab_telemetry_enabled') !== 'true') {
+    return;
   }
 
   try {
@@ -96,21 +107,48 @@ export async function trackResumeStats(
       return;
     }
 
-    const response = await fetch('/api/resume-stats', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        anonId,
-        targetRole,
-        eduLevel,
-        expBucket,
-        jdMatchScore,
-        skillTags: skillTags || [],
-        missingTags: missingTags || [],
-      }),
-    });
+    // 过滤技能标签，只保留字典中存在的标签
+    const validSkillTags = skillTags?.filter(tag => 
+      getAllSkillsDictionary().has(tag)
+    ) || [];
+
+    const validMissingTags = missingTags?.filter(tag => 
+      getAllSkillsDictionary().has(tag)
+    ) || [];
+
+    // 发送请求，带重试机制
+    const MAX_RETRIES = 2;
+    let retryCount = 0;
+    
+    const sendRequest = async (): Promise<Response> => {
+      try {
+        return await fetch('/api/resume-stats', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            anonId,
+            targetRole,
+            eduLevel,
+            expBucket,
+            jdMatchScore,
+            skillTags: validSkillTags,
+            missingTags: validMissingTags,
+          }),
+        });
+      } catch (error) {
+        if (retryCount < MAX_RETRIES) {
+          retryCount++;
+          // 等待1秒后重试
+          await new Promise(resolve => setTimeout(resolve, 1000));
+          return sendRequest();
+        }
+        throw error;
+      }
+    };
+
+    const response = await sendRequest();
 
     if (!response.ok) {
       console.error('Failed to track resume stats:', await response.text());
